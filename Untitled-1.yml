@@ -1,0 +1,64 @@
+openapi: "3.0.3"
+info:
+  title: API Title
+  version: "1.0"
+servers:
+  - url: http://localhost:8008
+paths:
+  /v1:
+    get:
+      responses:
+        "200":
+          description: OK
+  /register:
+    post:
+      tags:
+        - user
+      summary: Register user into the system
+      description: ""
+      operationId: registerUser
+      requestBody:
+        description: User registration.
+        content:
+          "application/json":
+            examples:
+              user:
+                summary: User registration example
+                value:
+                  email: ballzdeep69@lpc.com.vn,
+                  first_name: ligma,
+                  last_name: ballz,
+                  password: 12345678
+      responses:
+        "200":
+          description: successful operation
+          content:
+            "application/json":
+              example: '{"status":"success","data":[{"first_name":"ligma","last_name":"ballz","email":"ballzdeep69@lpc.com.vn","password":"12345678","_id":"673ef945767682eaf9365a73","createdAt":"2024-11-21T09:11:33.908Z","updatedAt":"2024-11-21T09:11:33.908Z","__v":0}],"message":"Thank you for registering with us. Your account has been successfully created."}'
+        default:
+          description: It seems you already have an account, please log in instead.
+  /login:
+    post:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      requestBody:
+        description: The login credentials payload.
+        content:
+          "application/json":
+            examples:
+              user:
+                summary: Login credentials example
+                value:
+                  email: ballzdeep69@lpc.com.vn
+                  password: 12345678
+      responses:
+        "200":
+          description: successful operation
+          content:
+            "application/json":
+              example: '{"status": "success","data": [{"_id": "673ef945767682eaf9365a73","first_name": "ligma","last_name": "ballz","email": "ballzdeep69@lpc.com.vn","role": "0x01","createdAt": "2024-11-21T09:11:33.908Z","updatedAt": "2024-11-21T09:11:33.908Z","__v": 0}],"message": "You have successfully logged in."}'
+        default:
+          description: Invalid email or password. Please try again with the correct credentials.
